@@ -1,0 +1,14 @@
+# Dependencies will be installed inside Docker.
+node_modules
+
+# Docker creates a fresh production build.
+build
+
+# The Storybook build is not part of the React production container.
+storybook-static
+
+# Git history is not required inside the image.
+.git
+
+# Local logs are not required.
+npm-debug.log*

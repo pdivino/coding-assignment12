@@ -1,46 +1,205 @@
-# Getting Started with Create React App
+# Coding Assignment 12: UI Garden
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A responsive React and TypeScript component library created with Storybook and Styled Components.
 
-## Available Scripts
+## Components
 
-In the project directory, you can run:
+- Button
+- Label
+- Text
+- Table
+- TableHeader
+- TableRow
+- TableCell
+- TableFooter
+- Dropdown
+- RadioButton
+- Img
+- HeroImage
+- Card
 
-### `npm start`
+Each component folder contains:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```text
+ComponentName.tsx
+ComponentName.stories.tsx
+ComponentName.types.tsx
+ComponentName.tests.tsx
+Index.ts
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Each component includes Storybook Controls, Default and Disabled stories, responsive styling, and two required tests.
 
-### `npm test`
+## Project Setup
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Requirements:
 
-### `npm run build`
+- Node.js 24
+- npm
+- Docker Desktop
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Install the dependencies:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```powershell
+npm.cmd install
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Run the React App
 
-### `npm run eject`
+```powershell
+npm.cmd start
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Open:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```text
+http://localhost:3000
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Run Storybook
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```powershell
+npm.cmd run storybook
+```
 
-## Learn More
+Open:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```text
+http://localhost:6006
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Storybook Controls can modify component properties such as text, background colour, content, and disabled state.
+
+## Run the Tests
+
+```powershell
+npm.cmd test -- --watchAll=false
+```
+
+Expected result:
+
+```text
+Test Suites: 2 passed
+Tests:       27 passed
+```
+
+Every component has:
+
+1. A test confirming it is visible.
+2. A test confirming its disabled background is grey.
+
+## Create Production Builds
+
+Create the optimized React build:
+
+```powershell
+npm.cmd run build
+```
+
+Create the static Storybook build:
+
+```powershell
+npm.cmd run build-storybook
+```
+
+The output folders are:
+
+```text
+build
+storybook-static
+```
+
+## Build the Docker Image
+
+Make sure Docker Desktop is running, then run:
+
+```powershell
+docker build -t divino_paolo_assignment12 .
+```
+
+The Dockerfile uses Node.js to create the optimized React build and Nginx to host the completed site.
+
+## Run the Docker Container
+
+```powershell
+docker run -d --name divino_paolo_coding_assignment12 -p 127.0.0.1:8083:8083 divino_paolo_assignment12
+```
+
+Open:
+
+```text
+http://localhost:8083
+```
+
+## Verify the Container
+
+Confirm that the container is running:
+
+```powershell
+docker ps --filter name=divino_paolo_coding_assignment12
+```
+
+Confirm the required working directory:
+
+```powershell
+docker exec divino_paolo_coding_assignment12 pwd
+```
+
+Expected result:
+
+```text
+/divino_paolo_ui_garden
+```
+
+View the container logs:
+
+```powershell
+docker logs divino_paolo_coding_assignment12
+```
+
+## Restart or Stop the Container
+
+Start an existing stopped container:
+
+```powershell
+docker start divino_paolo_coding_assignment12
+```
+
+Stop the container:
+
+```powershell
+docker stop divino_paolo_coding_assignment12
+```
+
+If the container must be recreated:
+
+```powershell
+docker stop divino_paolo_coding_assignment12
+docker rm divino_paolo_coding_assignment12
+docker run -d --name divino_paolo_coding_assignment12 -p 127.0.0.1:8083:8083 divino_paolo_assignment12
+```
+
+## Assignment Verification
+
+- Create React App and TypeScript used
+- Storybook installed
+- Styled Components used
+- All required components included
+- All components are responsive
+- Storybook Controls included
+- Default and Disabled states included
+- Disabled components are grey with a `not-allowed` cursor
+- Two tests included for every component
+- All 27 tests pass
+- React and Storybook production builds succeed
+- Docker working directory is `/divino_paolo_ui_garden`
+- Docker container is `divino_paolo_coding_assignment12`
+- Production site runs on `localhost:8083`
+
+## References
+
+- [Storybook Documentation](https://storybook.js.org/docs)
+- [Styled Components Documentation](https://styled-components.com/docs/basics)
+- [React Testing Library](https://github.com/testing-library/jest-dom)
+- [jest-styled-components](https://www.npmjs.com/package/jest-styled-components)
+- [Docker Documentation](https://docs.docker.com/)
